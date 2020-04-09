@@ -9,7 +9,7 @@ If you're looking for a quick way to unit-test a JavaScript function/object in a
 
 *   [Download tinytest.js](https://rawgit.com/joewalnes/jstinytest/master/tinytest.js)
 *   [Example](https://github.com/joewalnes/jstinytest/tree/master/example)
-```<html><iframe width="560" height="315" src="https://www.youtube.com/embed/0OjEx2UzLUI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></html>```
+
 10 second tutorial
 ------------------
 
