@@ -1,0 +1,68 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function includes(array, element, startingIndex) {
+
+        var resultBoolean;
+        var startingIndex;
+        if (arguments.length < 3 ) {
+            startingIndex = 0;
+        } else {
+            if (startingIndex < 0) {
+                startingIndex = array.length + startingIndex;
+            } else {
+                startingIndex = startingIndex;
+            }
+        }
+
+        for (let i = startingIndex; i < array.length; i++) {
+            if (array[i] === element) {
+                resultBoolean = true;
+                break;
+            }
+        }
+        if (resultBoolean === undefined) {
+            return false;
+        } else {
+            return resultBoolean;
+        }
+    }
+
+
+    tests({
+
+        'it should accept an array and a data element as arguments and return true if the element is found': function () {
+            includesResult = includes([1, 2], 1);
+            eq(includesResult === true, true);
+        },
+        'it should accept an array and a data element as arguments and return false if the element is not found in the array': function () {
+            includesResult = includes([1, 2], 3);
+            eq(includesResult === false, true);
+        },
+        'it should accept an index as the 3rd argument and begin searching the array from that position': function () {
+            includesResult = includes([1, 2], 2, 1);
+            eq(includesResult == true, true);
+        },
+
+        'if the provided index is 0, then the whole array will be searched': function () {
+            includesResult = includes([1, 2], 2, 0);
+            eq(includesResult == 1, true);
+        },
+        // 'if the provided index is > array.length - 1, then the whole array will be searched': function () {
+        //     includesResult = includes([1, 2], 1, 5);
+        //     eq(includesResult == 0, true);
+        // },
+        // 'if the provided index is negative, it is taken as the offset from the end of the array': function () {
+        //     includesResult = includes([1, 2, 3], 2, -3);
+        //     console.log(includesResult)
+        //     eq(includesResult == 1, false);
+        // },
+     
+
+
+
+    });
+
+
+
+</script>

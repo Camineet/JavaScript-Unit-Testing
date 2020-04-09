@@ -1,0 +1,60 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function concat() {
+        var resultArray = [];
+        var buildingArray = [];
+        for (let i = 0; i < arguments.length; i++) {
+            buildingArray = arguments[i];
+            for (let i = 0; i < buildingArray.length; i++) {
+                resultArray.push(buildingArray[i]);
+            }
+        }
+
+        return resultArray;
+
+    }
+
+
+    tests({
+        'it should accept other data types passed into the function': function () {
+            concatenatedArray = concat('a', 'b');
+            eq(concatenatedArray.length, 2);
+        },
+        'it should accept the arrays to be concatenated as arguments and concatenate them': function () {
+            concatenatedArray = concat([1], [2]);
+            eq(concatenatedArray.length, 2);
+        },
+        'it should return a new array': function () {
+            testArray = [];
+            newArray = concat(testArray);
+            eq(testArray === newArray, false);
+        },
+        'it should return a shallow copy of the existing array on which it is called if no additional arguments': function () {
+            testArray = [1, 2, 3];
+            newArray = concat(testArray);
+            eq(testArray.length === 3, true);
+        },
+        'it should not alter the original array on which it is called': function () {
+            testArray = [1, 2, 3];
+            newArray = concat(testArray);
+            eq(JSON.stringify(testArray), JSON.stringify(newArray));
+        },
+        'it should copy object references into the new array': function () {
+            testArray = [[1, 2, 3]];
+            newArray = concat(testArray);
+            testArray[0].push(4);
+            eq(JSON.stringify(testArray), JSON.stringify(newArray));
+        },
+        'it should not allow oerations on the new array to affect original arrays': function () {
+            testArray = [[1, 2, 3]];
+            newArray = concat(testArray);
+            newArray[0].push(4);
+            eq(testArray.length === 4, false);
+        },
+
+    });
+
+
+
+</script>

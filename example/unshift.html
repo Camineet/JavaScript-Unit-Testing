@@ -1,0 +1,67 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function unshift(array) {
+
+        //----copying array argument into new array for side-processing----
+        if (typeof array === 'object' && !Array.isArray(array)) {
+            var originalArray = Object.assign({}, array);
+        } if (Array.isArray(array)) {
+            var originalArray = array.slice(0);
+        }
+
+        //--------------instantiating basic variables -----------------
+        const originalArrayLength = originalArray.length;
+        var unshiftArgumentsCount = arguments.length - 1;
+        var newArrayLength = array.length + unshiftArgumentsCount;
+
+        //--------------setting up elementsArray -----------------
+        var elementsArray = [];
+        for (let i = 1; i < arguments.length; i++) {
+            elementsArray[elementsArray.length] = arguments[i];
+        }
+
+        //---------fill array with elementsArray values ---------
+        for (let i = 0; i < elementsArray.length; i++) {
+            array[i] = elementsArray[i];
+        }
+
+        //----------fill array with originalArray values---------
+        for (let i = 0; i < originalArrayLength; i++) {
+            array[array.length] = originalArray[i];
+
+            //-------------extra handling of array-like objects-----------
+            if (typeof array === 'object' && !Array.isArray(array)) {
+                array.length++;
+            }
+        }
+
+
+        return array.length;
+    }
+
+
+    tests({
+
+        'it should accept an array and elements and add the elements to the beginning of the array': function () {
+            var testArray = [1, 2];
+            unshiftedArrayLength = unshift(testArray, 3, 4);
+            console.log('testArray:', testArray)
+            eq(unshiftedArrayLength === 4, true);
+        },
+        'it should add elements to the beginning of objects too': function () {
+            var testObject = {
+                0: 'screw',
+                1: 'nail',
+                length: 2
+            };
+            unshiftedObjectLength = unshift(testObject, 'bolt', 'wingnut');
+            console.log('testObject:', testObject)
+            eq(unshiftedObjectLength === 4, true);
+        },
+
+    });
+
+
+
+</script>

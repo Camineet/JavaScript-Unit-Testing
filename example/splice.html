@@ -1,0 +1,119 @@
+<script src="../simpletest.js"></script>
+<script>
+  function splice(array, start, deleteCount) {
+    //------------------instantiate basic variables-------------
+    var beginningArray = [];
+    var remainingArray = [];
+    var addArray = [];
+    var deleteAmount;
+    var afterDeleteKeysLength;
+    var realStartIndex = array.length + start;
+    arguments.length < 3
+      ? (deleteAmount = array.length)
+      : (deleteAmount = deleteCount);
+
+    //------------------handle zero arguments case-------------
+    if (arguments.length < 2) {
+      array.length = 0;
+      return array;
+    }
+
+    //------------------handle negative start case-------------
+    if (start < 0 && !(realStartIndex < 0)) {
+      start = array.length + start;
+    } else if (realStartIndex < 0) {
+      start = 0;
+    }
+    console.log("start:", start);
+
+    //------------------delete items from array-------------
+    for (var i = start; i < start + deleteAmount; i++) {
+      delete array[i];
+    }
+    afterDeleteKeysLength = Object.keys(array).length;
+    console.log("array after deleting:", array);
+
+    //------------------populate beginningArray-------------
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === undefined) {
+        break;
+      } else {
+        beginningArray[i] = array[i];
+      }
+    }
+    console.log("beginningArray:", beginningArray);
+
+    //------------------populate remainingArray-------------
+    for (var i = start + deleteAmount, j = 0; i < array.length; i++, j++) {
+      remainingArray[j] = array[i];
+    }
+    console.log("remainingArray:", remainingArray);
+
+    //--------------populate addArray with argument values----------
+    for (var i = 3, j = 0; i < arguments.length; i++, j++) {
+      addArray[j] = arguments[i];
+    }
+    console.log("addArray:", addArray);
+
+    //--------------populate array with addArray values----------
+    if (arguments.length > 3) {
+      for (var i = start, j = 0; j < addArray.length; i++, j++) {
+        array[i] = addArray[j];
+      }
+    } else {
+      array.length = afterDeleteKeysLength;
+    }
+    console.log("array after adding addArray values:", array);
+
+    //----------populate array ending with remaining values----------
+    for (
+      var i = start + addArray.length, j = 0;
+      j < remainingArray.length;
+      i++, j++
+    ) {
+      array[i] = remainingArray[j];
+    }
+    console.log("array after adding remainingArray values:", array);
+
+    return array;
+  }
+
+  tests({
+    "it should return an empty array if no arguments": function () {
+      var testArray = [1, 2, 3, 4];
+      splicedArray = splice(testArray);
+      console.log("splicedArray:", splicedArray);
+      eq(JSON.stringify(testArray) === JSON.stringify([]), true);
+    },
+    "If negative, it will begin that many elements from the end of the array": function () {
+      var testArray = [1, 2, 3, 4];
+      splicedArray = splice(testArray, -2);
+      console.log("splicedArray:", splicedArray);
+      eq(JSON.stringify(testArray) === JSON.stringify([1, 2]), true);
+    },
+    "If array.length + start is less than 0, it will begin from index 0": function () {
+      var testArray = [1, 2, 3, 4];
+      splicedArray = splice(testArray, -20);
+      console.log("splicedArray:", splicedArray);
+      eq(JSON.stringify(testArray) === JSON.stringify([]), true);
+    },
+    "it should delete elements from the array beginning from a start argument": function () {
+      var testArray = [1, 2, 3, 4];
+      splicedArray = splice(testArray, 2);
+      console.log("splicedArray:", splicedArray);
+      eq(JSON.stringify(testArray) === JSON.stringify([1, 2]), true);
+    },
+    "it should delete a count of elements based on a deleteCount argument": function () {
+      var testArray = [1, 2, 3, 4];
+      splicedArray = splice(testArray, 1, 2);
+      console.log("splicedArray:", splicedArray);
+      eq(JSON.stringify(testArray) === JSON.stringify([1, 4]), true);
+    },
+    "it should add elements passed in as arguments from the start index after deleting": function () {
+      var testArray = [1, 2, 3, 4];
+      splicedArray = splice(testArray, 1, 2, 7, 7, 7);
+      console.log("splicedArray:", splicedArray);
+      eq(JSON.stringify(testArray) === JSON.stringify([1, 7, 7, 7, 4]), true);
+    },
+  });
+</script>

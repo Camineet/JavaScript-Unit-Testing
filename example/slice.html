@@ -1,0 +1,103 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function slice(array, begin, end) {
+
+        //--------------instantiating basic variables-----------------
+
+        var startIndex = 0;
+        var endIndex;
+        var sliceResult = [];
+
+        //--------------setting begin and end indices-----------------
+        if (arguments.length < 2) {
+            startIndex = 0;
+        } else {
+            startIndex = begin;
+            endIndex = end;
+        }
+        if (begin > array.lenth - 1) {
+            return sliceResult;
+        }
+
+        //--------------negative index edge cases-----------------
+        if (begin < 0) {
+            startIndex = array.length + begin;
+        }
+        if (end < 0) {
+            endIndex = array.length + end;
+        }
+
+        //--------------main processing loop-----------------
+        for (let i = startIndex; i < array.length; i++) {
+
+            if (Object.keys(array)[i] == endIndex) {
+                break;
+            }
+            sliceResult.push(array[i]);
+        }
+        return sliceResult;
+    }
+
+
+    tests({
+
+        'it should return a new array ': function () {
+            sliceResult = slice([1, 2]);
+            eq(Array.isArray(sliceResult) === true, true);
+        },
+        'it should return a copy of the original array': function () {
+            testArray = [1, 2]
+            sliceResult = slice(testArray);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([1, 2]), true);
+            eq(sliceResult === testArray, false);
+        },
+        'it should exclude items in the original array based on an optional begin element when returning the newly sliced aray': function () {
+            testArray = [1, 2]
+            sliceResult = slice(testArray, 1);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([2]), true);
+        },
+        'it should exclude items in the original array based on an optional end element when returning the newly sliced aray': function () {
+            testArray = [0, 1, 2]
+            sliceResult = slice(testArray, 0, 2);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([0, 1]), true);
+        },
+        'if begin is greater than the index range of the sequence, an empty array is returned': function () {
+            testArray = [0, 1, 2]
+            sliceResult = slice(testArray, 3, 2);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([]), true);
+        },
+        'if end is greater than the index range of the sequence, slice extracts through the end of the sequence': function () {
+            testArray = [0, 1, 2]
+            sliceResult = slice(testArray, 0, 5);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([0, 1, 2]), true);
+        },
+        'a negative index can be used for begin, indicating an offset from the end of the sequence': function () {
+            testArray = [0, 1, 2]
+            sliceResult = slice(testArray, -1);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([2]), true);
+        },
+
+        'a negative index can be used for end, indicating an offset from the end of the sequence': function () {
+            testArray = [0, 1, 2]
+            sliceResult = slice(testArray, 0, -1);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([0, 1]), true);
+        },
+        'values passed are references': function () {
+            testArray = [[1]]
+            sliceResult = slice(testArray);
+            testArray[0].push(2);
+            console.log('sliceResult:', sliceResult)
+            eq(JSON.stringify(sliceResult[0]) === JSON.stringify([1, 2]), true);
+        },
+        'if a new element is added to either array, the other array is not affected': function () {
+            testArray = [1]
+            sliceResult = slice(testArray);
+            testArray.push(2);
+            eq(JSON.stringify(sliceResult) === JSON.stringify([1, 2]), false);
+        },
+    });
+
+
+
+</script>

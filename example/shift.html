@@ -1,0 +1,62 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function shift(array) {
+
+        //--------------instantiating basic variables-----------------
+        var shiftedElement;
+        shiftedElement = array[0];
+
+        //--------------array is empty case-----------------
+        if (Object.keys(array) == 0) {
+            return undefined;
+        }
+
+        //--------------main processing loop-----------------
+        if (typeof array != 'object') {
+            for (let i = 1; i < array.length; i++) {
+                array[i - 1] = array[i];
+            }
+        }
+
+        array.length--;
+
+        //--------------handling array-like objects-----------------
+        if (!Array.isArray(array) && typeof array === 'object') {
+            delete array[0];
+        }
+
+
+        return shiftedElement;
+    }
+
+
+    tests({
+
+        'it should accept an array, remove the 1st element, and return the element': function () {
+            var testArray = [1, 2];
+            shiftedArrayElement = shift(testArray);
+
+            eq(shiftedArrayElement === 1, true);
+            eq(testArray.length === 1, true);
+        },
+        'it should return undefined if the array is empty': function () {
+            var testArray = [];
+            shiftedArrayElement = shift(testArray);
+            eq(shiftedArrayElement === undefined, true);
+        },
+        'it should work on array-like objects': function () {
+            var games = { 0: 'lol', 1: 'overwatch', 2: 'apex', length: 3 };
+            console.log('games before shifting:', games)
+            var shiftedElement = shift(games);
+            console.log('games after shifting:', games)
+            eq(shiftedElement, 'lol');
+            eq(games.length, 2);
+        },
+
+
+    });
+
+
+
+</script>

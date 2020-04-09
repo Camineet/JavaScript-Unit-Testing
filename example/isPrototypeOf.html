@@ -1,0 +1,69 @@
+<script src="../simpletest.js"></script>
+
+<script>
+
+    function isPrototypeOf(prototype, object) {
+        var successCounter = 0;
+        var prototypeProperties = Object.keys(prototype);
+
+        prototypeProperties.forEach(property => {
+            console.log('property:', property)
+            if (!object.hasOwnProperty(property)) {
+                if (typeof object[property] === 'function') {
+                    successCounter++;
+                    console.log('successCounter:', successCounter)
+                } 
+            }
+        });
+
+        return successCounter > 0 ? true : false;
+    }
+
+
+
+
+
+    tests({
+
+        'it should return a boolean value reporting if a prototype passed in as the 1st argument is the prototype of the object passed in as the 2nd argument': function () {
+            var canine = {
+                bark: function () {
+                    console.log('bark');
+                }
+            };
+
+            var dog = Object.create(canine);
+            dog.fetch = function () {
+                console.log('fetch');
+            };
+
+            var myDog = Object.create(dog);
+
+            var bool = isPrototypeOf(dog, myDog);
+
+            eq(bool === true, true);
+        },
+        'it should work for any number of prototype links': function () {
+            var canine = {
+                bark: function () {
+                    console.log('bark');
+                }
+            };
+
+            var dog = Object.create(canine);
+            dog.fetch = function () {
+                console.log('fetch');
+            };
+
+            var myDog = Object.create(dog);
+
+            var bool = isPrototypeOf(canine, myDog);
+
+            eq(bool === true, true);
+        },
+
+    });
+
+
+
+</script>

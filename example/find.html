@@ -1,0 +1,118 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function find(array, callback, optionalThis) {
+        var originalArray = array;
+        flexCallback = callback;
+        if (optionalThis) {
+            flexCallback = callback.bind(optionalThis);
+        }
+
+        for (let i = 0; i < array.length; i++) {
+            array = originalArray;
+
+            if (flexCallback(array[i], i, array)) {
+                return array[i];
+            }
+        }
+    }
+
+
+    tests({
+
+        'the callback will not visit any elements added to the array after the call to find begins': function () {
+            var testArray = [1, 1];
+            var numberOfTimesCallbackRun = 0;
+            find(testArray, function (number, index, array) {
+                numberOfTimesCallbackRun++;
+                return number > 1;
+                array.push(2);
+            });
+            console.log(testArray)
+
+            eq(numberOfTimesCallbackRun, 2);
+        },
+        'it should pass in the the ith element as the 1st argument to the callback': function () {
+            find([1], function (number, index) {
+                eq(number, 1);
+            });
+
+        },
+        'it should pass the index as the 2nd argument to the callback': function () {
+            find([1], function (number, index) {
+                eq(index, 0);
+
+            });
+        },
+        'it should pass the array as the 3rd argument to the callback': function () {
+            find([1, 2], function (element, index, array) {
+                eq(array.length === 2, true);
+
+            });
+        },
+        'it should accept an optional this argument': function () {
+            find([1], function (number, index) {
+                eq(this.description, 'optional this argument');
+
+            }, { description: 'optional this argument' });
+        },
+        'it should visit elements mutated or deleted by the callback and will use the value that exists at the time visited': function () {
+            var testArray = [1, , 1];
+            var testValue = 0;
+            find(testArray, function (number, index, array) {
+                array[1] = 2;
+                testValue = array[1];
+                return number > 1;
+            });
+            eq(testValue, 2);
+        },
+        'elements that are deleted are still visited': function () {
+            var testArray = [1, 1];
+            var numberOfTimesCallbackRun = 0;
+            find(testArray, function (number, index, array) {
+                delete array[1];
+                numberOfTimesCallbackRun++;
+                return number > 1;
+            });
+            eq(numberOfTimesCallbackRun, 2);
+        },
+        'the callback should be able to mutate the original array': function () {
+            var testArray = [1];
+            find(testArray, function (number, index, array) {
+                array.push(2);
+
+                return true;
+                eq(array.length === 2, true);
+
+            });
+        },
+        'it should return the first element in the array that satisfies the provided testing function': function () {
+            var array = [1, 2, 3]
+            returnElement = find(array, function (value) {
+                return value > 1;
+            });
+            eq(returnElement, 2);
+
+        },
+        'it should return undefined if no element in the array satisfies the provided testing function': function () {
+            var array = [1, 2, 3]
+            returnElement = find(array, function (value) {
+                return value > 3;
+            });
+            eq(returnElement, undefined);
+
+        },
+        'the callback should be invoked for every index of the array': function () {
+            var array = [, 2, 3]
+            var counter = 0;
+            find(array, function (value) {
+                counter++;
+            });
+            eq(counter, 3);
+
+        },
+    });
+
+
+
+</script>

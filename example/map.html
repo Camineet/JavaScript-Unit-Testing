@@ -1,0 +1,79 @@
+<script src="../tinytest.js"></script>
+<script>
+
+
+    function map(array, callback, optionalThis) {
+        var mapCallback = callback;
+        if (optionalThis) {
+            mapCallback = callback.bind(optionalThis);
+        }
+
+        var mappedArray = [];
+
+        for (var i = 0; i < array.length; i++) {
+            if (i in array) {
+                mappedArray[i] = mapCallback(array[i], i, array);
+            }
+
+        }
+        return mappedArray;
+    }
+
+    tests({
+
+        'it should skip unassigned indices': function () {
+            var weirdArray = [, 1]
+            var mappedArray = map(weirdArray, function double(number) {
+                return number * 2;
+            });
+            eq(0 in mappedArray, false);
+            eq(mappedArray[1], 2);
+        },
+        'it should return a mapped array': function () {
+            var mappedArray = map([1], function (number) {
+                return number * 4;
+            });
+            eq(mappedArray[0], 4);
+        },
+        'it should return a new array, not the original array': function () {
+            var originalArray = [];
+            var mappedArray = map(originalArray, function (number) {
+            });
+            eq(originalArray != mappedArray, true);
+        },
+        'it should return a new array': function () {
+            var filteredArray = map([], function () {
+            });
+            eq(Array.isArray(filteredArray), true);
+        },
+        'it should accept an optional this argument': function () {
+            map([1], function () {
+                eq(this.description, 'optional this argument');
+            }, { description: 'optional this argument' });
+        },
+        'it should pass in the original array as the 3rd argument to the callback': function () {
+            var testArray = [1]
+            map(testArray, function (number, index, passedArray) {
+                eq(testArray, passedArray);
+            });
+        },
+        'it should pass in the index to the callback': function () {
+            map([1], function (number, index) {
+                eq(index, 0);
+            });
+        },
+        'it should pass in the ith elemement as the 1st argument to the callback': function () {
+            map([1], function (element) {
+                eq(element, 1);
+            });
+        },
+        'it should run the callback function array.length times': function () {
+            counter = 0;
+            map([1, 2, 3], function () {
+                counter++;
+            });
+            eq(counter, 3);
+        }
+    });
+
+</script>

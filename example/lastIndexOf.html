@@ -1,0 +1,74 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function lastIndexOf(array, element, startingIndex) {
+
+        var resultIndex;
+        var startingIndex;
+        if (arguments.length < 3 || startingIndex === 0) {
+            startingIndex = array.length-1;
+        } else {
+            if (startingIndex < 0) {
+                startingIndex = array.length + startingIndex;
+            } else {
+                startingIndex = startingIndex;
+            }
+        }
+
+        for (let i = startingIndex; i >= 0; i--) {
+            if (array[i] === element) {
+                resultIndex = Object.keys(array)[i];
+                break;
+            }
+        }
+        if (resultIndex === undefined) {
+            return -1;
+        } else {
+            return resultIndex;
+        }
+    }
+
+
+    tests({
+
+        'it should accept an array and a data element as arguments and return the index of the element': function () {
+            indexResult = lastIndexOf([1, 2], 1);
+            eq(indexResult == 0, true);
+        },
+        'it should accept an array and a data element as arguments and return -1 if the element is not found in the array': function () {
+            indexResult = lastIndexOf([1, 2], 3);
+            eq(indexResult === -1, true);
+        },
+        'it should accept an index as the 3rd argument and begin searching the array from that position': function () {
+            indexResult = lastIndexOf([1, 2], 1, 1);
+            eq(indexResult == 0, true);
+        },
+
+        'if the provided index is 0, then the whole array will be searched': function () {
+            indexResult = lastIndexOf([1, 2], 2, 0);
+            eq(indexResult == 1, true);
+        },
+        'if the provided index is > array.length - 1, then the whole array will be searched': function () {
+            indexResult = lastIndexOf([1, 2], 1, 5);
+            eq(indexResult == 0, true);
+        },
+        'if the provided index is negative, it is taken as the offset from the end of the array': function () {
+            indexResult = lastIndexOf([1, 2, 3], 2, -3);
+            console.log(indexResult)
+            eq(indexResult == 1, false);
+        },
+        // 'If `array` is not an array, throw SyntaxError': function () {
+        //     try {
+        //         lastIndexOf(42);
+        //     } catch (e) {
+
+        //     }
+        // },
+
+
+
+    });
+
+
+
+</script>

@@ -1,0 +1,52 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function push(array) {
+
+        //--------------instantiating basic variables-----------------
+        var pushedArray = array;
+       
+        //--------------setting up elementsArray -----------------
+        var elementsArray = [];
+        for (let i = 1; i < arguments.length; i++) {
+            elementsArray[elementsArray.length] = arguments[i];
+        }
+      
+        //--------------main processing loop-----------------
+        for (let i = 0; i < elementsArray.length; i++) {
+            pushedArray[array.length] = elementsArray[i];
+            if (typeof pushedArray === 'object' && !Array.isArray(pushedArray)) {
+                pushedArray.length++;
+            }
+        }
+        return pushedArray.length;
+    }
+for (let index = 0; index < array.length; index++) {
+    const element = array[index];
+    
+}
+
+    tests({
+
+        'it should accept an array and elements and add the elements to the array': function () {
+            var testArray = [1, 2];
+            pushedArrayLength = push(testArray, 3, 4);
+            console.log('testArray:', testArray)
+            eq(pushedArrayLength === 4, true);
+        },
+        'it should add elements to the end of objects too': function () {
+            var testObject = {
+                0: 'screw',
+                1: 'nail',
+                length: 2
+            };
+            pushedObjectLength = push(testObject, 'bolt');
+            console.log('testObject:', testObject)
+            eq(pushedObjectLength === 3, true);
+        },
+
+    });
+
+
+
+</script>

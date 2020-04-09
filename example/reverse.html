@@ -1,0 +1,49 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function reverse(array) {
+
+        //--------------instantiating basic variables -----------------
+        var altArray = [];
+
+        //--------------populating alt-array -----------------
+        for (let i = 0; i < array.length; i++) {
+            altArray[i] = array[array.length - 1 - i];
+        }
+
+        //--------------handling array-like objects -----------------
+        if (!Array.isArray(array) && (typeof array === 'object')) {
+            altArray = {};
+            for (let i = 0; i < array.length; i++) {
+                altArray[i] = array[array.length - 1 - i];
+            }
+        }
+
+        //----------assign reversed value to array ---------
+        array = altArray;
+
+
+        return array;
+    }
+
+
+    tests({
+
+        'it should reverse the elements of an array in place, mutating and returning the array': function () {
+            var testArrayy = [1, 2, 3];
+            reversededArray = reverse(testArrayy, 3);
+            eq(JSON.stringify(reversededArray) === JSON.stringify([3, 2, 1]), true);
+        },
+        'it should work on array-like objects too': function () {
+            var testObject = { 0: 1, 1: 2, 2: 3, length: 3 };
+            reversededObject = reverse(testObject, 3);
+            console.log('reversededObject:', reversededObject)
+            eq(JSON.stringify(reversededArray) === JSON.stringify([3, 2, 1]), true);
+        },
+
+
+    });
+
+
+
+</script>

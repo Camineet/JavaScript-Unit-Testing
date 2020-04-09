@@ -1,0 +1,119 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function loopStringArray(array) {
+        for (var j = 0; j < array.length; j++) {
+
+            var tempElement;
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] > array[i + 1]) {
+                    tempElement = array[i]
+                    array[i] = array[i + 1]
+                    array[i + 1] = tempElement
+                }
+            }
+        }
+    }
+
+    function sort(array, compareFunc) {
+
+        //---------standard case with no compare function------------
+
+        if (arguments.length < 2) {
+            //------------------stringify array--------------------
+
+            for (var i = 0; i < array.length; i++) {
+                array[i] = JSON.stringify(array[i]);
+            }
+
+            //------------------sort stringArray-------------
+            loopStringArray(array);
+
+            //------------------unstringify array-------------
+            if (arguments.length < 2) {
+                for (var i = 0; i < array.length; i++) {
+                    array[i] = parseInt(array[i]);
+                }
+            }
+        }
+
+        //------------------case with compare function-------------
+        if (arguments.length === 2) {
+            var compareReturnValue;
+            for (var j = 0; j < array.length; j++) {
+
+                var tempElement;
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] != array[array.length - 1]) {
+                        compareReturnValue = compareFunc(array[i], array[i + 1])
+                        if (compareReturnValue > 0) {
+                            tempElement = array[i]
+                            array[i] = array[i + 1]
+                            array[i + 1] = tempElement
+                        }
+                    }
+                }
+            }
+        }
+        //------------------handling array-like objects-------------
+        if (arguments.length === 2) {
+            var compareReturnValue;
+            for (var j = 0; j < array.length; j++) {
+
+                var tempElement;
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] != array[array.length - 1]) {
+                        compareReturnValue = compareFunc(array[i].value, array[i + 1].value)
+                        if (compareReturnValue > 0) {
+                            tempElement = array[i]
+                            array[i] = array[i + 1]
+                            array[i + 1] = tempElement
+                        }
+                    }
+                }
+            }
+        }
+
+        return array;
+    }
+
+
+    tests({
+
+        'it should sort the elements of an array in place, mutating and returning the array': function () {
+            var testArray = [3, 2, 4, 5, 1];
+            sortedArray = sort(testArray);
+            console.log('sortedArray:', sortedArray)
+            console.log('testArray:', testArray)
+            eq(JSON.stringify(sortedArray) === JSON.stringify([1, 2, 3, 4, 5]), true);
+        },
+        'it should accept a compare function which specifies the sorting behavior': function () {
+            var testArray = [3, 2, 4, 5, 1];
+            sortedArray = sort(testArray, function (a, b) {
+                return a - b;
+            });
+            console.log('sortedArray:', sortedArray)
+            console.log('testArray:', testArray)
+            eq(JSON.stringify(sortedArray) === JSON.stringify([1, 2, 3, 4, 5]), true);
+        },
+        // 'it should work on array-like objects too': function () {
+        //     var items = [
+        //         { name: 'Edward', value: 21 },
+        //         { name: 'Sharpe', value: 37 },
+        //         { name: 'And', value: 45 },
+        //         { name: 'The', value: -12 },
+        //         { name: 'Magnetic', value: 13 },
+        //         { name: 'Zeros', value: 37 }
+        //     ];
+        //     sortedArrayByValue = sort(items, function (a, b) {
+        //         return a - b;
+        //     });
+        //     console.log('sortedArrayByValue:', sortedArrayByValue)
+        // },
+
+
+    });
+
+
+
+</script>

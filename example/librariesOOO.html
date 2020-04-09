@@ -1,0 +1,107 @@
+<script src="../simpletest.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script>
+    (function (root, undefined) {
+        var librariesWithUndefinedDependencies = [];
+        var libraryStorage = {};
+        var dependenciesWithUndefinedReturnValues = [];
+        var libIndCntrUndef = 0;
+
+        function librarySystem(libraryName, dependencies, callback) {
+            if (arguments.length > 1) {
+                var dependencyReturnValues = dependencies.map(function (dependency) {
+                    if (libraryStorage[dependency] === undefined) {
+                        dependenciesWithUndefinedReturnValues.push(dependency);
+                    }
+                    return libraryStorage[dependency];
+                });
+
+                if (Array.isArray(dependencies) && dependencies.length > 0
+                    && dependencyReturnValues.includes(undefined)) {
+                    librariesWithUndefinedDependencies[libIndCntrUndef] = { libraryName: libraryName, dependencies: dependencies, callback: callback };
+                    libIndCntrUndef++;
+
+
+                } else {
+                    libraryStorage[libraryName] = callback(...dependencyReturnValues);
+                    dependenciesWithUndefinedReturnValues = _.without(dependenciesWithUndefinedReturnValues, libraryName);
+                }
+            } else if (typeof arguments[0] === 'object' && dependenciesWithUndefinedReturnValues.length === 0) {
+                var cachedLibraryName = libraryName.libraryName;
+                var cachedDependencies = libraryName.dependencies;
+                var callback = libraryName.callback;
+                var dependencyReturnValues = cachedDependencies.map(function (dependency) {
+                    return libraryStorage[dependency];
+                });
+                libraryStorage[cachedLibraryName] = callback(...dependencyReturnValues);
+
+
+                librariesWithUndefinedDependencies.splice(0, 1);
+                if (librariesWithUndefinedDependencies.length === 0) {
+                    libIndCntrUndef = 0;
+                }
+            } else {
+                return libraryStorage[libraryName];
+            }
+
+            librarySystem(...librariesWithUndefinedDependencies);
+        }
+
+        root['librarySystem'] = librarySystem;
+        
+    })(this);
+
+
+    tests({
+
+        'it should load libraries only after their dependencies are defined': function () {
+            librarySystem('app', ['dependency'], function callback(dependency) {
+                return 'app with ' + dependency;
+            });
+            librarySystem('dependency', [], function () {
+                return 'loaded dependency';
+            });
+            var results = librarySystem('app');
+            console.log('results:', results)
+            eq(results === 'app with loaded dependency', true);
+        },
+        'it should load libraries with multiple dependencies': function () {
+            librarySystem('workBlurb', ['name', 'company'], function (name, company) {
+                return name + ' works at ' + company;
+            });
+            librarySystem('name', [], function () {
+                return 'Gordon';
+            });
+
+            librarySystem('company', [], function () {
+                return 'Watch and Code';
+            });
+
+            var results = librarySystem('workBlurb');
+            console.log('results:', results)
+            eq(results === 'Gordon works at Watch and Code', true);
+        },
+        'it should run the callback to librarySystem only once for each library': function () {
+            var callbackRunCounter = 0;
+            librarySystem('workBlurb', ['name', 'company'], function (name, company) {
+                callbackRunCounter++;
+                return name + ' works at ' + company;
+            });
+            librarySystem('name', [], function () {
+                return 'Gordon';
+            });
+
+            librarySystem('company', [], function () {
+                return 'Watch and Code';
+            });
+
+            console.log('callbackRunCounter:', callbackRunCounter)
+            eq(callbackRunCounter === 1, true);
+        },
+
+
+    });
+
+
+
+</script>

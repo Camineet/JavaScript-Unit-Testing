@@ -1,0 +1,85 @@
+<script src="../simpletest.js"></script>
+<script>
+
+    function join(array, separator) {
+
+        //--------------instantiating basic variables-----------------
+
+
+        var joinResult = '';
+        var separatorImage = '';
+        var separatorImageImprint = separator;
+
+        //--------------setting up alternate separator-----------------
+        if (arguments.length < 2) {
+            separatorImageImprint = ',';
+        } else {
+            separatorImageImprint = separator;
+        }
+
+
+        //--------------main processing loop-----------------
+        var indexElement;
+        for (let i = 0; i < array.length; i++) {
+            indexElement = array[i];
+            if (array[i] === undefined ||array[i] === null||array[i] === []) {
+                array[i] = '';
+            }
+            if (i > 0) {
+                separatorImage = separatorImageImprint;
+            }
+            joinResult += (separatorImage + array[i]);
+
+
+        }
+        return joinResult;
+    }
+
+
+    tests({
+
+        'If an element is an empty array, it is converted to an empty string': function () {
+            var testArray = [ [], 1];
+            joinResult = join(testArray);
+            eq(joinResult === ',1', true);
+        },
+
+        'If an element is null, it is converted to an empty string': function () {
+            var testArray = [1, null];
+            joinResult = join(testArray);
+            eq(joinResult === '1,', true);
+        },
+        'If an element is undefined, it is converted to an empty string': function () {
+            var testArray = [1, undefined];
+            joinResult = join(testArray);
+            eq(joinResult === '1,', true);
+        },
+        'If arr.length is 0, the empty string is returned': function () {
+            var testArray = [];
+            joinResult = join(testArray, '-');
+            eq(joinResult === '', true);
+        },
+        'it should accept an alternate separator': function () {
+            var testArray = [1, 2, 3, 4];
+            joinResult = join(testArray, '-');
+            eq(joinResult === '1-2-3-4', true);
+        },
+
+        'if the array has only one item, then that item will be returned without using the separator ': function () {
+            joinResult = join([1]);
+            eq(joinResult === '1', true);
+        },
+        'it should return a new string ': function () {
+            joinResult = join([1, 2]);
+            eq(typeof joinResult === "string", true);
+        },
+        'it should concatenate the elements of array and return a new string of them separated by comma if no supplied separator': function () {
+            var testArray = [1, 2, 3, 4];
+            joinResult = join(testArray);
+            eq(joinResult === '1,2,3,4', true);
+        },
+    });
+
+
+
+</script>
