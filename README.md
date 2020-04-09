@@ -1,7 +1,19 @@
-Tiniest JavaScript unit testing library
+Video Preview
 =======================================
 
-[![Alt text](https://img.youtube.com/vi/uvYWlkAdP_o/0.jpg)](https://www.youtube.com/watch?v=uvYWlkAdP_o)
+[![Alt text](https://img.youtube.com/vi/wT5Q2osNADw/0.jpg)](https://www.youtube.com/watch?v=wT5Q2osNADw)
+
+Thanks for taking a look at my testing code examples. Here is what you will find in the ```tests``` folders above.
+
+array_functions
+---------------
+
+I've rewritten hand-made versions of all of JavaScript's baked-in array functions and tested them. The most challenging one was splice, and the code for it serves as a good example of the top of my test writing abilities.
+
+betterToFixed
+-------------
+
+I've created a hand-made version of the baked-in JavaScript function ```toFixed```
 
 
 This is an in-browser JavaScript library I've been using for years. It's so small and simple that it never occured to me to open source it until I saw all the overly complicated alternatives that are out there.
