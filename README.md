@@ -8,12 +8,19 @@ Thanks for taking a look at my testing code examples. Here is what you will find
 array_functions
 ---------------
 
-I've rewritten hand-made versions of all of JavaScript's baked-in array functions and tested them. The most challenging one was splice, and the code for it serves as a good example of the top of my test writing abilities.
+I've rewritten of all of JavaScript's baked-in array functions with hand-made versions and tested them. The most challenging one was splice, and the code for it serves as a good example of the top of my test writing abilities.
 
 betterToFixed
 -------------
 
-I've created a hand-made version of the baked-in JavaScript function ```toFixed```
+I've created a hand-made version of the baked-in JavaScript function ```toFixed```. Due to the way JavaScript stores numbers, it can sometimes make rounding errors. This function I've written fixes that problem, and I've written tests to ensure it works well.
+
+isPrototypeOf
+-------------
+
+This inheritance function checks if an object's prototype is the prototype of another object. Assuming that an object and its parent object are compared, the function will return true. The function will also traverse an inheritance hierarchy to check and see if an object's prototype is the same as a parent object's prototype in scenarions where there is more than one degree of separation in the lineage hierarchy.
+
+
 
 
 This is an in-browser JavaScript library I've been using for years. It's so small and simple that it never occured to me to open source it until I saw all the overly complicated alternatives that are out there.
