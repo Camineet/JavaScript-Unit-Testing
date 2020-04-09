@@ -3,7 +3,8 @@ Thanks for taking a look at my testing code examples. Here is what you will find
 array_functions
 ---------------
 
-I've rewritten of all of JavaScript's baked-in array functions with hand-made versions and tested them. The most challenging one was splice, and the code for it serves as a good example of my highest test writing abilities.
+I've rewritten of all of JavaScript's baked-in array functions with hand-made versions and tested them. The code for these serves as a good example of my test writing abilities.
+
 Video Preview
 =======================================
 [![Alt text](https://img.youtube.com/vi/pEbvg_hazyA/0.jpg)](https://www.youtube.com/watch?v=pEbvg_hazyA)
