@@ -1,14 +1,13 @@
-Video Preview
-=======================================
-
-[![Alt text](https://img.youtube.com/vi/wT5Q2osNADw/0.jpg)](https://www.youtube.com/watch?v=wT5Q2osNADw)
-
 Thanks for taking a look at my testing code examples. Here is what you will find in the ```tests``` folders above.
 
 array_functions
 ---------------
 
 I've rewritten of all of JavaScript's baked-in array functions with hand-made versions and tested them. The most challenging one was splice, and the code for it serves as a good example of my highest test writing abilities.
+Video Preview
+=======================================
+[![Alt text](https://img.youtube.com/vi/pEbvg_hazyA/0.jpg)](https://www.youtube.com/watch?v=pEbvg_hazyA)
+
 
 betterToFixed
 -------------
