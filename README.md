@@ -26,7 +26,7 @@ This inheritance function checks if an object's prototype is the prototype of an
 
 Video Preview
 -------------
-[![Alt text](https://img.youtube.com/vi/f9n8tsFh3aE/0.jpg)](https://www.youtube.com/watch?v=f9n8tsFh3aE)
+[![Alt text](https://img.youtube.com/vi/YsLr_msfuW8/0.jpg)](https://www.youtube.com/watch?v=YsLr_msfuW8)
 
 librariesOOO
 ------------
@@ -35,4 +35,4 @@ This function loads libraries with dependencies and can accommodate declarations
 
 Video Preview
 -------------
-[![Alt text](https://img.youtube.com/vi/f9n8tsFh3aE/0.jpg)](https://www.youtube.com/watch?v=f9n8tsFh3aE)
+[![Alt text](https://img.youtube.com/vi/2PPvV6d-MYE/0.jpg)](https://www.youtube.com/watch?v=2PPvV6d-MYE)
