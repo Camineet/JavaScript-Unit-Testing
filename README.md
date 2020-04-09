@@ -6,7 +6,6 @@ array_functions
 I've rewritten of all of JavaScript's baked-in array functions with hand-made versions and tested them. The code for these serves as a good example of my test writing abilities.
 
 Video Preview
--------------
 [![Alt text](https://img.youtube.com/vi/pEbvg_hazyA/0.jpg)](https://www.youtube.com/watch?v=pEbvg_hazyA)
 
 
@@ -16,7 +15,6 @@ betterToFixed
 I've created a hand-made version of the baked-in JavaScript function ```toFixed```. Due to the way JavaScript stores numbers, it can sometimes make rounding errors. This function I've written fixes that problem, and I've written tests to ensure it works well.
 
 Video Preview
--------------
 [![Alt text](https://img.youtube.com/vi/f9n8tsFh3aE/0.jpg)](https://www.youtube.com/watch?v=f9n8tsFh3aE)
 
 isPrototypeOf
