@@ -1,109 +1,101 @@
 <script src="../../simpletest.js"></script>
 
 <script>
-
-    function isPrototypeOf(prototype, object) {
-        var prototypePrototype
-        if (Object.getPrototypeOf(prototype) === null) {
-            prototypePrototype = prototype;
-        } else {
-            prototypePrototype = Object.getPrototypeOf(prototype);
-
-        }
-
-        var objectPrototype = Object.getPrototypeOf(object);
-        if (objectPrototype === null) {
-            return false;
-        }
-
-        while (Object.getPrototypeOf(prototypePrototype) !== null) {
-            prototypePrototype = Object.getPrototypeOf(prototypePrototype);
-        }
-        while (Object.getPrototypeOf(objectPrototype) !== null) {
-            objectPrototype = Object.getPrototypeOf(objectPrototype);
-        }
-
-        return objectPrototype === prototypePrototype ? true : false;
-
+  function isPrototypeOf(prototype, object) {
+    var prototypePrototype;
+    if (Object.getPrototypeOf(prototype) === null) {
+      prototypePrototype = prototype;
+    } else {
+      prototypePrototype = Object.getPrototypeOf(prototype);
     }
 
-    tests({
+    var objectPrototype = Object.getPrototypeOf(object);
+    if (objectPrototype === null) {
+      return false;
+    }
 
-        'it should return a boolean value reporting if a prototype passed in as the 1st argument is the prototype of the object passed in as the 2nd argument': function () {
-            var canine = {
-                bark: function () {
-                    console.log('bark');
-                }
-            };
+    while (Object.getPrototypeOf(prototypePrototype) !== null) {
+      prototypePrototype = Object.getPrototypeOf(prototypePrototype);
+    }
+    while (Object.getPrototypeOf(objectPrototype) !== null) {
+      objectPrototype = Object.getPrototypeOf(objectPrototype);
+    }
 
-            var dog = Object.create(canine);
-            dog.fetch = function () {
-                console.log('fetch');
-            };
+    return objectPrototype === prototypePrototype ? true : false;
+  }
 
-            var myDog = Object.create(dog);
-
-            var bool = isPrototypeOf(dog, myDog);
-
-            eq(bool === true, true);
+  tests({
+    "it should return a boolean value reporting if a prototype passed in as the 1st argument is the prototype of the object passed in as the 2nd argument": function () {
+      var canine = {
+        bark: function () {
+          console.log("bark");
         },
-        'it should work for any number of prototype links': function () {
-            var canine = {
-                bark: function () {
-                    console.log('bark');
-                }
-            };
+      };
 
-            var dog = Object.create(canine);
-            dog.fetch = function () {
-                console.log('fetch');
-            };
+      var dog = Object.create(canine);
+      dog.fetch = function () {
+        console.log("fetch");
+      };
 
-            var myDog = Object.create(dog);
+      var myDog = Object.create(dog);
 
-            var bool = isPrototypeOf(canine, myDog);
+      var bool = isPrototypeOf(dog, myDog);
 
-            eq(bool === true, true);
+      eq(bool === true, true);
+    },
+    "it should work for any number of prototype links": function () {
+      var canine = {
+        bark: function () {
+          console.log("bark");
         },
-        'it should work for empty too': function () {
-            var canine = {
-                bark: function () {
-                    console.log('bark');
-                }
-            };
+      };
 
-            var dog = Object.create(canine);
-            dog.fetch = function () {
-                console.log('fetch');
-            };
+      var dog = Object.create(canine);
+      dog.fetch = function () {
+        console.log("fetch");
+      };
 
-            var empty = Object.create(null);
+      var myDog = Object.create(dog);
 
-            var bool = isPrototypeOf(dog, empty);
+      var bool = isPrototypeOf(canine, myDog);
 
-            eq(bool === false, true);
+      eq(bool === true, true);
+    },
+    "it should work for empty too": function () {
+      var canine = {
+        bark: function () {
+          console.log("bark");
         },
-        'it should work when checking against the grandfather prototype too': function () {
-            var canine = {
-                bark: function () {
-                    console.log('bark');
-                }
-            };
+      };
 
-            var dog = Object.create(canine);
-            dog.fetch = function () {
-                console.log('fetch');
-            };
+      var dog = Object.create(canine);
+      dog.fetch = function () {
+        console.log("fetch");
+      };
 
-            var myDog = Object.create(dog);
+      var empty = Object.create(null);
 
-            var bool = isPrototypeOf(Object.prototype, myDog);
+      var bool = isPrototypeOf(dog, empty);
 
-            eq(bool === true, true);
+      eq(bool === false, true);
+    },
+    "it should work when checking against the grandfather prototype too": function () {
+      var canine = {
+        bark: function () {
+          console.log("bark");
         },
+      };
 
-    });
+      var dog = Object.create(canine);
+      dog.fetch = function () {
+        console.log("fetch");
+      };
 
+      var myDog = Object.create(dog);
 
+      var bool = isPrototypeOf(Object.prototype, myDog);
 
+      eq(bool === true, true);
+    },
+  });
 </script>
