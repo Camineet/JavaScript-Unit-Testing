@@ -20,7 +20,10 @@ isPrototypeOf
 
 This inheritance function checks if an object's prototype is the prototype of another object. Assuming that an object and its parent object are compared, the function will return true. The function will also traverse an inheritance hierarchy to check and see if an object's prototype is the same as a parent object's prototype in scenarions where there is more than one degree of separation in the lineage hierarchy.
 
+librariesOOO
+------------
 
+This function loads libraries with dependencies and can accommodate declarations of libraries even if the definitions of their dependencies have yet to be performed. The name of the function ```librariesOOO``` is short for libraries out of order. The tests first declare a library with dependencies that have yet to be defined. But instead of halting with an error, the function makes note of the dependencies that have yet to be defined. When those dependencies are finally defined, the function identifies this event and proceeds to create the library with the one or more previously undefined dependencies.
 
 
 This is an in-browser JavaScript library I've been using for years. It's so small and simple that it never occured to me to open source it until I saw all the overly complicated alternatives that are out there.
