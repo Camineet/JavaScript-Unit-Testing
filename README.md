@@ -1,4 +1,4 @@
-Thanks for taking a look at my testing code examples. Here is what you will find in the ```tests``` folders above.
+Thanks for taking a look at my testing code examples. Here is what you will find in the ```tests``` folder above.
 
 array_functions
 ---------------
