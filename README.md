@@ -22,7 +22,7 @@ Video Preview
 isPrototypeOf
 -------------
 
-This inheritance function checks if an object's prototype is the prototype of another object. Assuming that an object and its parent object are compared, the function will return true. The function will also traverse an inheritance hierarchy to check if an object's prototype is the same as a parent object's prototype in scenarios where there is more than one degree of separation in the lineage hierarchy.
+This inheritance function checks if an object is the child of another object. Assuming that an object and its parent object are compared, the function will return true. The function will also traverse an inheritance hierarchy to check if an object's prototype is the same as a parent object's prototype in scenarios where there is more than one degree of separation in the lineage hierarchy.
 
 Video Preview
 -------------
