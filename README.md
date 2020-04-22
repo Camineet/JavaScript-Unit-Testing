@@ -3,7 +3,7 @@ Thanks for taking a look at my unit test code examples. Here is what you will fi
 array_functions
 ---------------
 
-I've rewritten of all of JavaScript's baked-in array functions with hand-made versions and tested them. The code for these serves as a good example of my test writing abilities.
+I've rewritten of all of JavaScript's baked-in array functions with hand-made versions and tested them. The code for these serves as a good example of my unit testing abilities.
 
 isPrototypeOf
 -------------
