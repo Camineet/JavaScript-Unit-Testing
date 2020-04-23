@@ -1,4 +1,8 @@
-Thanks for taking a look at my unit test code examples from my recent coursework. Here is what you will find in the ```tests``` folder above.
+Thanks for taking a look at my unit test code examples from my recent coursework. Inside the ```tests``` folder above, you'll find JavaScript unit tests for functions I wrote as part of my studies. A description of these functions can be found below.
+
+An enhanced version of a framework called tinytest by joewalnes found [here](https://github.com/joewalnes/jstinytest) is used to easily run the tests in each file. To run the tests, simply clone this repo to your machine and open any of the files in a browser. 
+
+Here is what you will find in the ```tests``` folder above.
 
 array_functions
 ---------------
