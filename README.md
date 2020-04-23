@@ -1,4 +1,4 @@
-Thanks for taking a look at my unit test code examples. Here is what you will find in the ```tests``` folder above.
+Thanks for taking a look at my unit test code examples from my recent coursework. Here is what you will find in the ```tests``` folder above.
 
 array_functions
 ---------------
