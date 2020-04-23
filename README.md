@@ -2,7 +2,7 @@ Thanks for taking a look at my unit test code examples from my recent coursework
 
 An enhanced version of a framework called tinytest by joewalnes found [here](https://github.com/joewalnes/jstinytest) is used to easily run the tests in each file. To run the tests, simply clone this repo to your machine and open any of the files in a browser. Opening the console in Chrome developer tools will show individual test outcomes logs like this:
 
-![](images/capture2.png)
+![](images/Capture2.png)
 
 array_functions
 ---------------
