@@ -1,13 +1,13 @@
 Thanks for taking a look at my unit test code examples from my recent coursework. Inside the ```tests``` folder above, you'll find JavaScript unit tests for functions I wrote as part of my studies. A description of these functions can be found below.
 
-An enhanced version of a framework called tinytest by joewalnes found [here](https://github.com/joewalnes/jstinytest) is used to easily run the tests in each file. To run the tests, simply clone this repo to your machine and open any of the files in a browser. Opening the console in Chrome developer tools will show individual test outcome logs like this:
-
-![](images/Capture2.png)
-
 array_functions
 ---------------
 
 I've rewritten of most of JavaScript's baked-in array functions with hand-made versions and tested them. The code for these serves as a good example of my unit testing abilities. The tests cover typical and edge cases described in the MDN documentation for the functions. My favorites are splice, reduce, and unshift.
+
+An enhanced version of a framework called tinytest by joewalnes found [here](https://github.com/joewalnes/jstinytest) is used to easily run the tests in each file. To run the tests, simply clone this repo to your machine and open any of the html files in a browser. Opening the console in Chrome developer tools will show individual test outcome logs like this:
+
+![](images/Capture2.png)
 
 isPrototypeOf
 -------------
