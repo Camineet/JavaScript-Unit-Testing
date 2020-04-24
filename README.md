@@ -12,7 +12,7 @@ I've rewritten of most of JavaScript's baked-in array functions with hand-made v
 isPrototypeOf
 -------------
 
-This inheritance function checks if an object is the child of another object. When testing a parent prototype and an object, the function will return true if they equal. The function will also traverse an inheritance hierarchy to check if an object's prototype is the same as a parent object's prototype in scenarios where there is more than one degree of separation in the lineage hierarchy.
+This inheritance function checks if an object is the child of another object. The function will also traverse an inheritance hierarchy in scenarios where there is more than one degree of separation in the lineage.
 
 librariesOOO
 ------------
